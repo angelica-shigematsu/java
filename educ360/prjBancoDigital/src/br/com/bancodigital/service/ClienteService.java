@@ -17,8 +17,19 @@ public class ClienteService {
 		if (!validarSenha(senha)) return false;
 		
 		Cliente cliente = new Cliente();
+		cliente.setNome(nome);
+		cliente.setCpf(cpf);
+		cliente.setSenha(senha);
+		
 		dao.adicionarCliente(cliente);
 		return true;
+	}
+	
+	public Cliente listarCliente(int id) {
+		Cliente cliente;
+		cliente = dao.buscarClienteDao(id);
+		if (cliente!= null) return cliente;
+		return null;
 	}
 	
 	public int getUltimoClienteId() {		
@@ -52,6 +63,16 @@ public class ClienteService {
 		}
 		
 		return true;
+	}
+	
+	public boolean validarLogin(int id, String senha) {
+		if (senha.isEmpty()) return false;
+		
+		if (id < 0) return false;
+		
+//		if(dao.verificarLogin(id, senha)) return true;
+		
+		return false;
 	}
 }
 
